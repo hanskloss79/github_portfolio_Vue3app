@@ -9,8 +9,10 @@
     </div>
 </template>
 <script>
+import { octokitMixin } from "../../../mixins/octokitMixin";
 
 export default {
+    name: "IssueComments",
 
     props: {
         owner: {
@@ -58,17 +60,25 @@ export default {
     },
 
     watch: {
-        owner() {
-            this.getIssueComments();
+        owner: {
+            immediate: true,
+            handler(val) {
+                this.getIssueComments(val, this.repo, this.issueNumber);
+            },
         },
-        repo() {
-            this.getIssueComments();
+        repo: {
+            immediate: true,
+            handler(val) {
+                this.getIssueComments(this.owner, val, this.issueNumber);
+            },
         },
-        issueNumber() {
-            this.getIssueComments();
-        }
-
-    }
-}
+        issueNumber: {
+            immediate: true,
+            handler(val) {
+                this.getIssueComments(this.owner, this.repo, val);
+            },
+        },
+    },
+};
 
 </script>
