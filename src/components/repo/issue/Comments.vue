@@ -29,15 +29,15 @@ export default {
         },
     },
 
-    mixins: [octokitMixin],
-
     data() {
         return {
-            owner,
-            repo,
-            issue_number: issueNumber,
+          comments: [],
         }
     },
+
+    mixins: [octokitMixin],
+
+    
 
     methods: {
         async getIssueComments(owner, repo, issueNumber) {
@@ -49,8 +49,7 @@ export default {
                 return;
             }
             const octokit = this.createOctokitClient();
-            const { data: comments } = await
-                octokit.issues.listComments({
+            const { data: comments } = await octokit.issues.listComments({
                     owner,
                     repo,
                     issue_number: issueNumber,

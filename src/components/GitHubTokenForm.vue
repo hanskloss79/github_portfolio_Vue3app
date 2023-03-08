@@ -6,7 +6,7 @@
             <input id="githubToken" v-model="githubToken" />
         </div>
         <div>
-            <input type="submit" value="Save token" />
+            <input type="submit" value="Zapisz token" />
             <button type="button" v-on:click="clearToken">Wyczyść token</button>
         </div>
     </form>
